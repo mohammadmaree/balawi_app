@@ -151,6 +151,7 @@ class _CustomersPageState extends State<CustomersPage> {
         ),
       ),
       floatingActionButton: FloatingActionButton(
+        heroTag: 'customers_fab',
         onPressed: () {
           Get.to(CustomerDetailsPage(isEditing: false));
         },

@@ -160,6 +160,7 @@ class _DeliveriesPageState extends State<DeliveriesPage> {
         ),
       ),
       floatingActionButton: FloatingActionButton(
+        heroTag: 'deliveries_fab',
         onPressed: () {
           Get.to(const WorkOrderDetailsPage(isEditing: false));
         },
