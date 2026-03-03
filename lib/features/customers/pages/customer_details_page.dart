@@ -84,11 +84,6 @@ class _CustomerDetailsPageState extends State<CustomerDetailsPage> {
       return;
     }
 
-    if (phoneNumberController.text.trim().isEmpty) {
-      SnackbarHelper.showError(LanguageKeys.pleaseEnterPhoneNumber);
-      return;
-    }
-
     // Require PIN verification only when editing existing customer
     if (!isNewCustomer) {
       final bool verified = await DialogHelper.showPinVerification(context);
