@@ -55,4 +55,55 @@ class LanguageKeys {
   static const String apply = 'تطبيق';
   static const String showLess = 'إظهار أقل';
   static const String showMore = 'شاهد المزيد';
+
+  // Work Orders / Deliveries
+  static const String workOrders = 'التسليمات';
+  static const String addWorkOrder = 'إضافة طلب جديد';
+  static const String editWorkOrder = 'تعديل الطلب';
+  static const String workOrderDetails = 'تفاصيل الطلب';
+  static const String shelfNumber = 'رقم الرف';
+  static const String price = 'السعر';
+  static const String paidAmount = 'المبلغ المدفوع';
+  static const String remainingAmount = 'المبلغ المتبقي';
+  static const String isPaid = 'مدفوع';
+  static const String notPaid = 'غير مدفوع';
+  static const String status = 'الحالة';
+  static const String ready = 'جاهز';
+  static const String delivered = 'تم التسليم';
+  static const String workDescription = 'وصف العمل';
+  static const String deliveryDate = 'تاريخ التسليم';
+  static const String selectShelf = 'اختر الرف';
+  static const String selectStatus = 'اختر الحالة';
+
+  // Work Order Validation
+  static const String pleaseEnterPrice = 'يرجى إدخال السعر';
+  static const String pleaseSelectShelf = 'يرجى اختيار الرف';
+  static const String pleaseSelectStatus = 'يرجى اختيار الحالة';
+
+  // Work Order Success Messages
+  static const String workOrderAddedSuccessfully = 'تم إضافة الطلب بنجاح';
+  static const String workOrderUpdatedSuccessfully = 'تم تحديث الطلب بنجاح';
+  static const String workOrderDeletedSuccessfully = 'تم حذف الطلب بنجاح';
+  static const String workOrderDeliveredSuccessfully = 'تم تسليم الطلب بنجاح';
+
+  // Work Order Error Messages
+  static const String deleteWorkOrderFailed = 'فشل حذف الطلب';
+
+  // Statistics
+  static const String totalOrders = 'إجمالي الطلبات';
+  static const String readyOrders = 'جاهز';
+  static const String deliveredOrders = 'تم التسليم';
+  static const String unpaidOrders = 'غير مدفوع';
+  static const String totalRevenue = 'إجمالي الإيرادات';
+  static const String paidRevenue = 'المبلغ المدفوع';
+  static const String remainingRevenue = 'المبلغ المتبقي';
+
+  // Actions
+  static const String markAsDelivered = 'تسليم الطلب';
+  static const String markAsPaid = 'تعليم كمدفوع';
+  static const String filter = 'فلتر';
+  static const String clearFilters = 'إزالة الفلاتر';
+  static const String allStatuses = 'كل الحالات';
+  static const String allShelves = 'كل الرفوف';
+  static const String allPaymentStatuses = 'كل حالات الدفع';
 }
