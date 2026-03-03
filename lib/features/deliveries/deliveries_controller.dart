@@ -27,6 +27,8 @@ class DeliveriesController extends GetxController {
   String? selectedShelf;
   bool? selectedPaymentStatus;
   String? searchQuery;
+  DateTime? selectedDateFrom;
+  DateTime? selectedDateTo;
 
   @override
   void onInit() {
@@ -64,6 +66,8 @@ class DeliveriesController extends GetxController {
       status: selectedStatus,
       shelfNumber: selectedShelf,
       isPaid: selectedPaymentStatus,
+      dateFrom: selectedDateFrom?.toIso8601String(),
+      dateTo: selectedDateTo?.toIso8601String(),
       page: page,
       limit: 10,
     );
@@ -117,10 +121,14 @@ class DeliveriesController extends GetxController {
     String? status,
     String? shelf,
     bool? paymentStatus,
+    DateTime? dateFrom,
+    DateTime? dateTo,
   }) async {
     selectedStatus = status;
     selectedShelf = shelf;
     selectedPaymentStatus = paymentStatus;
+    selectedDateFrom = dateFrom;
+    selectedDateTo = dateTo;
     await fetchWorkOrders(refresh: true);
   }
 
@@ -129,7 +137,19 @@ class DeliveriesController extends GetxController {
     selectedStatus = null;
     selectedShelf = null;
     selectedPaymentStatus = null;
+    selectedDateFrom = null;
+    selectedDateTo = null;
     await fetchWorkOrders(refresh: true);
+  }
+
+  /// Check if any filter is active
+  bool get hasActiveFilters {
+    return selectedStatus != null ||
+        selectedShelf != null ||
+        selectedPaymentStatus != null ||
+        selectedDateFrom != null ||
+        selectedDateTo != null ||
+        (searchQuery != null && searchQuery!.isNotEmpty);
   }
 
   /// Create a new work order

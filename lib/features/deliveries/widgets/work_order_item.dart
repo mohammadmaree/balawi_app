@@ -113,6 +113,20 @@ class WorkOrderItem extends StatelessWidget {
     return PrimaryColors.error;
   }
 
+  Color _getCardBackgroundColor() {
+    if (workOrder.status == 'تم التسليم') {
+      return PrimaryColors.success.withValues(alpha: 0.05);
+    }
+    return PrimaryColors.white;
+  }
+
+  Color _getCardBorderColor() {
+    if (workOrder.status == 'تم التسليم') {
+      return PrimaryColors.success.withValues(alpha: 0.3);
+    }
+    return PrimaryColors.grey;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Dismissible(
@@ -166,9 +180,9 @@ class WorkOrderItem extends StatelessWidget {
             vertical: UiResponsive.calculateHeight(7.0),
           ),
           decoration: BoxDecoration(
-            color: PrimaryColors.white,
+            color: _getCardBackgroundColor(),
             borderRadius: BorderRadius.circular(12.0),
-            border: Border.all(color: PrimaryColors.grey, width: 0.5),
+            border: Border.all(color: _getCardBorderColor(), width: 0.5),
             boxShadow: [
               BoxShadow(
                 offset: const Offset(0, 2),
@@ -257,81 +271,105 @@ class WorkOrderItem extends StatelessWidget {
               ),
               SizedBox(height: UiResponsive.calculateHeight(10)),
 
-              // Price Info
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      BuildDefaultText(
-                        text: LanguageKeys.price,
-                        color: PrimaryColors.hint,
-                        fontSize: UiResponsive.dimension_12,
-                      ),
-                      BuildDefaultText(
-                        text: '${workOrder.price ?? 0} ل.س',
-                        color: PrimaryColors.black,
-                        fontSize: UiResponsive.dimension_15,
-                        fontWeight: FontWeight.w600,
-                      ),
-                    ],
-                  ),
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      BuildDefaultText(
-                        text: LanguageKeys.paidAmount,
-                        color: PrimaryColors.hint,
-                        fontSize: UiResponsive.dimension_12,
-                      ),
-                      BuildDefaultText(
-                        text: '${workOrder.paidAmount ?? 0} ل.س',
-                        color: PrimaryColors.success,
-                        fontSize: UiResponsive.dimension_15,
-                        fontWeight: FontWeight.w600,
-                      ),
-                    ],
-                  ),
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      BuildDefaultText(
-                        text: LanguageKeys.remainingAmount,
-                        color: PrimaryColors.hint,
-                        fontSize: UiResponsive.dimension_12,
-                      ),
-                      BuildDefaultText(
-                        text: '${workOrder.remainingAmount} ل.س',
-                        color: PrimaryColors.error,
-                        fontSize: UiResponsive.dimension_15,
-                        fontWeight: FontWeight.w600,
-                      ),
-                    ],
-                  ),
-                ],
-              ),
-
-              // Date if delivered
-              if (workOrder.deliveryDate != null) ...[
-                SizedBox(height: UiResponsive.calculateHeight(8)),
+              // Price Info (only show if price > 0)
+              if (workOrder.price != null && workOrder.price! > 0) ...[
                 Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Icon(
-                      Icons.calendar_today,
-                      size: UiResponsive.dimension_12,
-                      color: PrimaryColors.hint,
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        BuildDefaultText(
+                          text: LanguageKeys.price,
+                          color: PrimaryColors.hint,
+                          fontSize: UiResponsive.dimension_12,
+                        ),
+                        BuildDefaultText(
+                          text: '${workOrder.price ?? 0} ل.س',
+                          color: PrimaryColors.black,
+                          fontSize: UiResponsive.dimension_15,
+                          fontWeight: FontWeight.w600,
+                        ),
+                      ],
                     ),
-                    SizedBox(width: UiResponsive.calculateWidth(4)),
-                    BuildDefaultText(
-                      text:
-                          '${LanguageKeys.deliveryDate}: ${_formatDate(workOrder.deliveryDate)}',
-                      color: PrimaryColors.hint,
-                      fontSize: UiResponsive.dimension_12,
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        BuildDefaultText(
+                          text: LanguageKeys.paidAmount,
+                          color: PrimaryColors.hint,
+                          fontSize: UiResponsive.dimension_12,
+                        ),
+                        BuildDefaultText(
+                          text: '${workOrder.paidAmount ?? 0} ل.س',
+                          color: PrimaryColors.success,
+                          fontSize: UiResponsive.dimension_15,
+                          fontWeight: FontWeight.w600,
+                        ),
+                      ],
+                    ),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        BuildDefaultText(
+                          text: LanguageKeys.remainingAmount,
+                          color: PrimaryColors.hint,
+                          fontSize: UiResponsive.dimension_12,
+                        ),
+                        BuildDefaultText(
+                          text: '${workOrder.remainingAmount} ل.س',
+                          color: PrimaryColors.error,
+                          fontSize: UiResponsive.dimension_15,
+                          fontWeight: FontWeight.w600,
+                        ),
+                      ],
                     ),
                   ],
                 ),
+                SizedBox(height: UiResponsive.calculateHeight(8)),
               ],
+
+              // Dates Section
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  // Created Date (always show)
+                  Row(
+                    children: [
+                      Icon(
+                        Icons.add_circle_outline,
+                        size: UiResponsive.dimension_12,
+                        color: PrimaryColors.blue,
+                      ),
+                      SizedBox(width: UiResponsive.calculateWidth(4)),
+                      BuildDefaultText(
+                        text:
+                            'تاريخ الإضافة: ${_formatDate(workOrder.createdAt)}',
+                        color: PrimaryColors.hint,
+                        fontSize: UiResponsive.dimension_11,
+                      ),
+                    ],
+                  ),
+                  // Delivery Date (if exists)
+                  if (workOrder.deliveryDate != null)
+                    Row(
+                      children: [
+                        Icon(
+                          Icons.check_circle_outline,
+                          size: UiResponsive.dimension_12,
+                          color: PrimaryColors.success,
+                        ),
+                        SizedBox(width: UiResponsive.calculateWidth(4)),
+                        BuildDefaultText(
+                          text:
+                              'التسليم: ${_formatDate(workOrder.deliveryDate)}',
+                          color: PrimaryColors.hint,
+                          fontSize: UiResponsive.dimension_11,
+                        ),
+                      ],
+                    ),
+                ],
+              ),
             ],
           ),
         ),

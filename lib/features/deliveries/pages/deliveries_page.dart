@@ -1,13 +1,16 @@
 import 'package:balawi_app/core/resources/color.dart';
+import 'package:balawi_app/core/resources/images.dart';
 import 'package:balawi_app/core/resources/language_keys.dart';
 import 'package:balawi_app/core/util/snackbar_helper.dart';
 import 'package:balawi_app/core/util/ui_responsive.dart';
 import 'package:balawi_app/core/widgets/build_default_text.dart';
 import 'package:balawi_app/features/deliveries/deliveries_controller.dart';
 import 'package:balawi_app/features/deliveries/pages/work_order_details_page.dart';
+import 'package:balawi_app/features/deliveries/widgets/work_order_filter_bottom_sheet.dart';
 import 'package:balawi_app/features/deliveries/widgets/work_order_item.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 
 class DeliveriesPage extends StatefulWidget {
@@ -92,6 +95,8 @@ class _DeliveriesPageState extends State<DeliveriesPage> {
                           ),
                           SizedBox(height: UiResponsive.calculateHeight(20.0)),
                           _buildStatistics(),
+                          SizedBox(height: UiResponsive.calculateHeight(20.0)),
+                          _buildSearchField(),
                           SizedBox(height: UiResponsive.calculateHeight(20.0)),
                         ],
                       ),
@@ -229,6 +234,137 @@ class _DeliveriesPageState extends State<DeliveriesPage> {
           ),
         ],
       ),
+    );
+  }
+
+  Widget _buildSearchField() {
+    return Row(
+      children: [
+        Expanded(
+          child: SizedBox(
+            width: UiResponsive.screenWidth! * 0.9,
+            child: TextFormField(
+              controller: deliveriesController.searchTextController,
+              keyboardType: TextInputType.text,
+              textInputAction: TextInputAction.search,
+              style: const TextStyle(color: PrimaryColors.black),
+              decoration: InputDecoration(
+                filled: true,
+                fillColor: PrimaryColors.white,
+                hintText: 'ابحث عن اسم الزبون',
+                hintStyle: TextStyle(
+                  fontSize: UiResponsive.dimension_14,
+                  color: const Color(0xFF9A9DA3),
+                  fontWeight: FontWeight.w500,
+                  fontFamily: 'IBMPlexSansArabic',
+                ),
+                suffixIcon: GestureDetector(
+                  onTap: () => deliveriesController.search(),
+                  child: SvgPicture.asset(
+                    PrimaryImages.search,
+                    fit: BoxFit.scaleDown,
+                  ),
+                ),
+                prefixIcon:
+                    deliveriesController.searchQuery != null &&
+                        deliveriesController.searchQuery!.isNotEmpty
+                    ? GestureDetector(
+                        onTap: () => deliveriesController.clearSearch(),
+                        child: Icon(
+                          Icons.clear,
+                          color: PrimaryColors.hint,
+                          size: UiResponsive.dimension_20,
+                        ),
+                      )
+                    : null,
+                focusColor: PrimaryColors.grey,
+                contentPadding: EdgeInsets.only(
+                  top: UiResponsive.calculateHeight(20.0),
+                  bottom: UiResponsive.calculateHeight(22.0),
+                  right: UiResponsive.calculateWidth(15.0),
+                ),
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(12.0),
+                  borderSide: const BorderSide(
+                    color: PrimaryColors.grey,
+                    width: 1.0,
+                  ),
+                ),
+                focusedBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(12.0),
+                  borderSide: const BorderSide(
+                    color: PrimaryColors.grey,
+                    width: 1.0,
+                  ),
+                ),
+                disabledBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(12.0),
+                  borderSide: const BorderSide(
+                    color: PrimaryColors.grey,
+                    width: 1.0,
+                  ),
+                ),
+                enabledBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(12.0),
+                  borderSide: const BorderSide(
+                    color: PrimaryColors.grey,
+                    width: 1.0,
+                  ),
+                ),
+              ),
+              onFieldSubmitted: (String? v) {
+                deliveriesController.search();
+              },
+            ),
+          ),
+        ),
+        SizedBox(width: UiResponsive.calculateWidth(10)),
+        GestureDetector(
+          onTap: () {
+            showModalBottomSheet(
+              context: context,
+              isScrollControlled: true,
+              backgroundColor: Colors.transparent,
+              builder: (context) {
+                return const WorkOrderFilterBottomSheet();
+              },
+            );
+          },
+          child: Container(
+            width: UiResponsive.calculateWidth(50),
+            height: UiResponsive.calculateHeight(55),
+            decoration: BoxDecoration(
+              color: deliveriesController.hasActiveFilters
+                  ? PrimaryColors.blue
+                  : PrimaryColors.blue,
+              borderRadius: BorderRadius.circular(12),
+            ),
+            child: Stack(
+              alignment: Alignment.center,
+              children: [
+                Icon(
+                  Icons.filter_list,
+                  color: PrimaryColors.white,
+                  size: UiResponsive.dimension_24,
+                ),
+                if (deliveriesController.hasActiveFilters)
+                  Positioned(
+                    top: 8,
+                    right: 8,
+                    child: Container(
+                      width: 8,
+                      height: 8,
+                      decoration: const BoxDecoration(
+                        color: PrimaryColors.error,
+                        shape: BoxShape.circle,
+                      ),
+                    ),
+                  ),
+              ],
+            ),
+          ),
+        ),
+      ],
     );
   }
 
