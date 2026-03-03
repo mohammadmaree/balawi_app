@@ -67,104 +67,87 @@ class _CustomersPageState extends State<CustomersPage> {
   Widget build(BuildContext context) {
     customerController = Get.put(CustomerController());
     return Scaffold(
-      body: PopScope(
-        canPop: false,
-        child: SafeArea(
-          child: GetBuilder<CustomerController>(
-            builder: (_) {
-              return RefreshIndicator(
-                onRefresh: () =>
-                    customerController.fetchCustomers(refresh: true),
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 15.0),
-                  child: CustomScrollView(
-                    controller: _scrollController,
-                    slivers: [
-                      SliverToBoxAdapter(
-                        child: Column(
-                          children: [
-                            SizedBox(
-                              height: UiResponsive.calculateHeight(20.0),
-                            ),
-                            BuildDefaultText(
-                              text: 'الزبائن',
-                              color: PrimaryColors.black,
-                              fontSize:
-                                  UiResponsive.dimension_15 +
-                                  UiResponsive.dimension_15,
-                              fontWeight: FontWeight.bold,
-                              textAlign: TextAlign.center,
-                            ),
-                            SizedBox(
-                              height: UiResponsive.calculateHeight(20.0),
-                            ),
-                            _buildSearchField(),
-                            SizedBox(
-                              height: UiResponsive.calculateHeight(20.0),
-                            ),
-                          ],
-                        ),
+      body: SafeArea(
+        child: GetBuilder<CustomerController>(
+          builder: (_) {
+            return RefreshIndicator(
+              onRefresh: () => customerController.fetchCustomers(refresh: true),
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 15.0),
+                child: CustomScrollView(
+                  controller: _scrollController,
+                  slivers: [
+                    SliverToBoxAdapter(
+                      child: Column(
+                        children: [
+                          SizedBox(height: UiResponsive.calculateHeight(20.0)),
+                          BuildDefaultText(
+                            text: 'الزبائن',
+                            color: PrimaryColors.black,
+                            fontSize:
+                                UiResponsive.dimension_15 +
+                                UiResponsive.dimension_15,
+                            fontWeight: FontWeight.bold,
+                            textAlign: TextAlign.center,
+                          ),
+                          SizedBox(height: UiResponsive.calculateHeight(20.0)),
+                          _buildSearchField(),
+                          SizedBox(height: UiResponsive.calculateHeight(20.0)),
+                        ],
                       ),
-                      // Loading state
-                      if (customerController.isLoading)
-                        SliverFillRemaining(
-                          child: Center(
-                            child: CircularProgressIndicator(
-                              color: PrimaryColors.blue,
-                            ),
-                          ),
-                        )
-                      // Error state
-                      else if (customerController.errorMessage != null &&
-                          customerController.customers.isEmpty)
-                        SliverFillRemaining(child: _buildErrorWidget())
-                      // Empty state
-                      else if (customerController.customers.isEmpty)
-                        SliverFillRemaining(child: _buildEmptyWidget())
-                      // Customer list
-                      else
-                        SliverList(
-                          delegate: SliverChildBuilderDelegate(
-                            (context, index) {
-                              if (index ==
-                                  customerController.customers.length) {
-                                // Loading more indicator
-                                if (customerController.isLoadingMore) {
-                                  return Padding(
-                                    padding: EdgeInsets.symmetric(
-                                      vertical: UiResponsive.calculateHeight(
-                                        20,
-                                      ),
-                                    ),
-                                    child: Center(
-                                      child: CircularProgressIndicator(
-                                        color: PrimaryColors.blue,
-                                      ),
-                                    ),
-                                  );
-                                }
-                                // Bottom padding
-                                return SizedBox(
-                                  height: UiResponsive.calculateHeight(75.0),
-                                );
-                              }
-
-                              final customer =
-                                  customerController.customers[index];
-                              return CustomerItem(
-                                customer: customer,
-                                onDelete: () => _handleDelete(customer.id),
-                              );
-                            },
-                            childCount: customerController.customers.length + 1,
+                    ),
+                    // Loading state
+                    if (customerController.isLoading)
+                      SliverFillRemaining(
+                        child: Center(
+                          child: CircularProgressIndicator(
+                            color: PrimaryColors.blue,
                           ),
                         ),
-                    ],
-                  ),
+                      )
+                    // Error state
+                    else if (customerController.errorMessage != null &&
+                        customerController.customers.isEmpty)
+                      SliverFillRemaining(child: _buildErrorWidget())
+                    // Empty state
+                    else if (customerController.customers.isEmpty)
+                      SliverFillRemaining(child: _buildEmptyWidget())
+                    // Customer list
+                    else
+                      SliverList(
+                        delegate: SliverChildBuilderDelegate((context, index) {
+                          if (index == customerController.customers.length) {
+                            // Loading more indicator
+                            if (customerController.isLoadingMore) {
+                              return Padding(
+                                padding: EdgeInsets.symmetric(
+                                  vertical: UiResponsive.calculateHeight(20),
+                                ),
+                                child: Center(
+                                  child: CircularProgressIndicator(
+                                    color: PrimaryColors.blue,
+                                  ),
+                                ),
+                              );
+                            }
+                            // Bottom padding
+                            return SizedBox(
+                              height: UiResponsive.calculateHeight(75.0),
+                            );
+                          }
+
+                          final customer = customerController.customers[index];
+                          return CustomerItem(
+                            customer: customer,
+                            onDelete: () => _handleDelete(customer.id),
+                          );
+                        }, childCount: customerController.customers.length + 1),
+                      ),
+                  ],
                 ),
-              );
-            },
-          ),
+              ),
+            );
+          },
         ),
       ),
       floatingActionButton: FloatingActionButton(
