@@ -58,13 +58,13 @@ class BuildDefaultFormField extends StatelessWidget {
           fontWeight: FontWeight.w400,
         ),
         floatingLabelBehavior: FloatingLabelBehavior.always,
-        hintText: huntText,
-        hintStyle: TextStyle(
-          color: PrimaryColors.hint,
-          fontSize: UiResponsive.screenWidth! * 0.04,
-          fontWeight: FontWeight.w400,
-          fontFamily: AppConstants.TAJAWAL,
-        ),
+        // hintText: huntText,
+        // hintStyle: TextStyle(
+        //   color: PrimaryColors.hint,
+        //   fontSize: UiResponsive.screenWidth! * 0.04,
+        //   fontWeight: FontWeight.w400,
+        //   fontFamily: AppConstants.TAJAWAL,
+        // ),
         contentPadding: EdgeInsetsDirectional.only(
           start: UiResponsive.screenWidth! * 0.05,
           top: UiResponsive.screenHeight! * 0.027,

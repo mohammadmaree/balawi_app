@@ -138,31 +138,31 @@ class _WorkOrderFilterBottomSheetState
               ],
             ),
           ),
-          SizedBox(height: UiResponsive.calculateHeight(30.0)),
+          SizedBox(height: UiResponsive.calculateHeight(15.0)),
 
           // Status Filter
           _buildSectionTitle(LanguageKeys.status),
           SizedBox(height: UiResponsive.calculateHeight(10)),
           _buildStatusOptions(),
-          SizedBox(height: UiResponsive.calculateHeight(25)),
+          SizedBox(height: UiResponsive.calculateHeight(15)),
 
           // Shelf Filter
           _buildSectionTitle(LanguageKeys.shelfNumber),
           SizedBox(height: UiResponsive.calculateHeight(10)),
           _buildShelfOptions(),
-          SizedBox(height: UiResponsive.calculateHeight(25)),
+          SizedBox(height: UiResponsive.calculateHeight(15)),
 
           // Payment Status Filter
           _buildSectionTitle(LanguageKeys.isPaid),
           SizedBox(height: UiResponsive.calculateHeight(10)),
           _buildPaymentStatusOptions(),
-          SizedBox(height: UiResponsive.calculateHeight(25)),
+          SizedBox(height: UiResponsive.calculateHeight(15)),
 
           // Date Filter
           _buildSectionTitle('التاريخ'),
           SizedBox(height: UiResponsive.calculateHeight(10)),
           _buildDateFilters(),
-          SizedBox(height: UiResponsive.calculateHeight(40)),
+          SizedBox(height: UiResponsive.calculateHeight(30)),
 
           // Apply Button
           _buildApplyButton(),

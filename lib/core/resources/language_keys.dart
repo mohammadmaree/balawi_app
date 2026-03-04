@@ -19,7 +19,7 @@ class LanguageKeys {
   static const String editCustomer = 'تعديل الزبون';
   static const String customerDetails = 'تفاصيل الزبون';
   static const String fullName = 'الاسم الكامل *';
-  static const String phoneNumber = 'رقم الهاتف *';
+  static const String phoneNumber = 'رقم الهاتف';
   static const String pantsHeight = 'طول البنطلون';
   static const String waistWidth = 'عرض الخصر';
   static const String pantsLegWidth = 'عرض رجل البنطلون';

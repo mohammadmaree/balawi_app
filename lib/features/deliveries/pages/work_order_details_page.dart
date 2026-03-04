@@ -341,13 +341,6 @@ class _WorkOrderDetailsPageState extends State<WorkOrderDetailsPage> {
           fontWeight: FontWeight.w400,
         ),
         floatingLabelBehavior: FloatingLabelBehavior.always,
-        hintText: LanguageKeys.notes,
-        hintStyle: TextStyle(
-          color: PrimaryColors.hint,
-          fontSize: UiResponsive.screenWidth! * 0.045,
-          fontWeight: FontWeight.w400,
-          fontFamily: AppConstants.TAJAWAL,
-        ),
         contentPadding: EdgeInsetsDirectional.only(
           start: UiResponsive.screenWidth! * 0.05,
           top: UiResponsive.screenHeight! * 0.019,

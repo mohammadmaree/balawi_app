@@ -353,8 +353,8 @@ class _DeliveriesPageState extends State<DeliveriesPage> {
                     top: 8,
                     right: 8,
                     child: Container(
-                      width: 8,
-                      height: 8,
+                      width: 5,
+                      height: 5,
                       decoration: const BoxDecoration(
                         color: PrimaryColors.error,
                         shape: BoxShape.circle,
