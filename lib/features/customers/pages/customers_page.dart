@@ -91,9 +91,19 @@ class _CustomersPageState extends State<CustomersPage> {
                             textAlign: TextAlign.center,
                           ),
                           SizedBox(height: UiResponsive.calculateHeight(20.0)),
-                          _buildSearchField(),
-                          SizedBox(height: UiResponsive.calculateHeight(20.0)),
                         ],
+                      ),
+                    ),
+                    SliverPersistentHeader(
+                      pinned: true,
+                      delegate: _SearchHeaderDelegate(
+                        child: Container(
+                          color: PrimaryColors.white,
+                          padding: EdgeInsets.only(
+                            bottom: UiResponsive.calculateHeight(10.0),
+                          ),
+                          child: _buildSearchField(),
+                        ),
                       ),
                     ),
                     // Loading state
@@ -338,5 +348,31 @@ class _CustomersPageState extends State<CustomersPage> {
         ],
       ),
     );
+  }
+}
+
+class _SearchHeaderDelegate extends SliverPersistentHeaderDelegate {
+  final Widget child;
+
+  _SearchHeaderDelegate({required this.child});
+
+  @override
+  double get minExtent => 70.0;
+
+  @override
+  double get maxExtent => 70.0;
+
+  @override
+  Widget build(
+    BuildContext context,
+    double shrinkOffset,
+    bool overlapsContent,
+  ) {
+    return child;
+  }
+
+  @override
+  bool shouldRebuild(_SearchHeaderDelegate oldDelegate) {
+    return false;
   }
 }
