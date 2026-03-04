@@ -322,49 +322,16 @@ class _WorkOrderFilterBottomSheetState
             ),
           ),
         ),
-        SizedBox(height: UiResponsive.calculateHeight(10)),
-        // Date To
-        GestureDetector(
-          onTap: () => _selectDate(context, false),
-          child: Container(
-            padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 15),
-            decoration: BoxDecoration(
-              color: PrimaryColors.white,
-              borderRadius: BorderRadius.circular(12),
-              border: Border.all(color: PrimaryColors.grey, width: 1),
-            ),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                BuildDefaultText(
-                  text: selectedDateTo != null
-                      ? 'إلى: ${_formatDate(selectedDateTo)}'
-                      : 'إلى تاريخ',
-                  color: selectedDateTo != null
-                      ? PrimaryColors.black
-                      : PrimaryColors.hint,
-                  fontSize: UiResponsive.dimension_14,
-                ),
-                Icon(
-                  Icons.calendar_today,
-                  color: PrimaryColors.blue,
-                  size: UiResponsive.dimension_18,
-                ),
-              ],
-            ),
-          ),
-        ),
-        if (selectedDateFrom != null || selectedDateTo != null) ...[
+        if (selectedDateFrom != null) ...[
           SizedBox(height: UiResponsive.calculateHeight(10)),
           GestureDetector(
             onTap: () {
               setState(() {
                 selectedDateFrom = null;
-                selectedDateTo = null;
               });
             },
             child: BuildDefaultText(
-              text: 'مسح التواريخ',
+              text: 'مسح التاريخ',
               color: PrimaryColors.error,
               fontSize: UiResponsive.dimension_12,
               textDecoration: TextDecoration.underline,

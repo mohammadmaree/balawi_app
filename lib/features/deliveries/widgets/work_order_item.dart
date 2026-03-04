@@ -285,7 +285,7 @@ class WorkOrderItem extends StatelessWidget {
                           fontSize: UiResponsive.dimension_12,
                         ),
                         BuildDefaultText(
-                          text: '${workOrder.price ?? 0} ل.س',
+                          text: '${workOrder.price ?? 0} دينار',
                           color: PrimaryColors.black,
                           fontSize: UiResponsive.dimension_15,
                           fontWeight: FontWeight.w600,
@@ -301,7 +301,7 @@ class WorkOrderItem extends StatelessWidget {
                           fontSize: UiResponsive.dimension_12,
                         ),
                         BuildDefaultText(
-                          text: '${workOrder.paidAmount ?? 0} ل.س',
+                          text: '${workOrder.paidAmount ?? 0} دينار',
                           color: PrimaryColors.success,
                           fontSize: UiResponsive.dimension_15,
                           fontWeight: FontWeight.w600,
@@ -317,7 +317,7 @@ class WorkOrderItem extends StatelessWidget {
                           fontSize: UiResponsive.dimension_12,
                         ),
                         BuildDefaultText(
-                          text: '${workOrder.remainingAmount} ل.س',
+                          text: '${workOrder.remainingAmount} دينار',
                           color: PrimaryColors.error,
                           fontSize: UiResponsive.dimension_15,
                           fontWeight: FontWeight.w600,

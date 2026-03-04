@@ -33,7 +33,6 @@ class _WorkOrderDetailsPageState extends State<WorkOrderDetailsPage> {
   late TextEditingController phoneController;
   late TextEditingController priceController;
   late TextEditingController paidAmountController;
-  late TextEditingController workDescriptionController;
   late TextEditingController notesController;
 
   String? shelfSelected;
@@ -58,9 +57,6 @@ class _WorkOrderDetailsPageState extends State<WorkOrderDetailsPage> {
     paidAmountController = TextEditingController(
       text: widget.workOrder?.paidAmount?.toString() ?? '',
     );
-    workDescriptionController = TextEditingController(
-      text: widget.workOrder?.workDescription ?? '',
-    );
     notesController = TextEditingController(
       text: widget.workOrder?.notes ?? '',
     );
@@ -75,7 +71,6 @@ class _WorkOrderDetailsPageState extends State<WorkOrderDetailsPage> {
     phoneController.dispose();
     priceController.dispose();
     paidAmountController.dispose();
-    workDescriptionController.dispose();
     notesController.dispose();
     super.dispose();
   }
@@ -122,7 +117,6 @@ class _WorkOrderDetailsPageState extends State<WorkOrderDetailsPage> {
       paidAmount: paidAmount,
       isPaid: isPaid || paidAmount >= price,
       status: statusSelected,
-      workDescription: workDescriptionController.text.trim(),
       notes: notesController.text.trim(),
     );
 
@@ -179,8 +173,6 @@ class _WorkOrderDetailsPageState extends State<WorkOrderDetailsPage> {
                 _buildPriceAndPaidRow(),
                 SizedBox(height: UiResponsive.calculateHeight(20.0)),
                 _buildPaidCheckbox(),
-                SizedBox(height: UiResponsive.calculateHeight(20.0)),
-                _buildWorkDescriptionField(),
                 SizedBox(height: UiResponsive.calculateHeight(20.0)),
                 _buildNotesField(),
                 SizedBox(height: UiResponsive.calculateHeight(30.0)),
@@ -328,15 +320,6 @@ class _WorkOrderDetailsPageState extends State<WorkOrderDetailsPage> {
           fontSize: UiResponsive.dimension_14,
         ),
       ],
-    );
-  }
-
-  Widget _buildWorkDescriptionField() {
-    return BuildDefaultFormField(
-      controller: workDescriptionController,
-      huntText: LanguageKeys.workDescription,
-      textInputType: TextInputType.text,
-      textInputAction: TextInputAction.next,
     );
   }
 
