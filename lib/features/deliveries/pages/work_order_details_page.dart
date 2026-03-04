@@ -93,6 +93,23 @@ class _WorkOrderDetailsPageState extends State<WorkOrderDetailsPage> {
       return;
     }
 
+    // Validate phone number if provided
+    final phone = phoneController.text.trim();
+    if (phone.isNotEmpty) {
+      if (phone.length != 10) {
+        SnackbarHelper.showError('رقم الهاتف يجب أن يكون مكون من 10 أرقام');
+        return;
+      }
+      if (!phone.startsWith('07')) {
+        SnackbarHelper.showError('رقم الهاتف يجب أن يبدأ بـ 07');
+        return;
+      }
+      if (!RegExp(r'^[0-9]+$').hasMatch(phone)) {
+        SnackbarHelper.showError('رقم الهاتف يجب أن يحتوي على أرقام فقط');
+        return;
+      }
+    }
+
     // Require PIN verification only when editing
     if (!isNewOrder) {
       final bool verified = await DialogHelper.showPinVerification(context);
