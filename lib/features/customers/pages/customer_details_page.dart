@@ -207,7 +207,7 @@ class _CustomerDetailsPageState extends State<CustomerDetailsPage> {
   Widget _buildNameField() {
     return BuildDefaultFormField(
       controller: nameController,
-      huntText: LanguageKeys.fullName,
+      label: LanguageKeys.fullName,
       textInputType: TextInputType.name,
       textInputAction: TextInputAction.next,
     );
@@ -221,7 +221,7 @@ class _CustomerDetailsPageState extends State<CustomerDetailsPage> {
           width: UiResponsive.screenWidth! * 0.42,
           child: BuildDefaultFormField(
             controller: pantsHeightController,
-            huntText: LanguageKeys.pantsHeight,
+            label: LanguageKeys.pantsHeight,
             textInputType: TextInputType.number,
             textInputAction: TextInputAction.next,
             maxLength: 3,
@@ -231,7 +231,7 @@ class _CustomerDetailsPageState extends State<CustomerDetailsPage> {
           width: UiResponsive.screenWidth! * 0.42,
           child: BuildDefaultFormField(
             controller: waistWidthController,
-            huntText: LanguageKeys.waistWidth,
+            label: LanguageKeys.waistWidth,
             textInputType: TextInputType.number,
             textInputAction: TextInputAction.next,
             maxLength: 3,
@@ -244,7 +244,7 @@ class _CustomerDetailsPageState extends State<CustomerDetailsPage> {
   Widget _buildPantsLegWidthField() {
     return BuildDefaultFormField(
       controller: pantsLegWidthController,
-      huntText: LanguageKeys.pantsLegWidth,
+      label: LanguageKeys.pantsLegWidth,
       textInputType: TextInputType.number,
       textInputAction: TextInputAction.next,
       maxLength: 3,
@@ -269,9 +269,11 @@ class _CustomerDetailsPageState extends State<CustomerDetailsPage> {
   Widget _buildPhoneField() {
     return BuildDefaultFormField(
       controller: phoneNumberController,
-      huntText: LanguageKeys.phoneNumber,
+      label: LanguageKeys.phoneNumber,
+      huntText: "07XXXXXXXX",
       textInputType: TextInputType.phone,
       textInputAction: TextInputAction.next,
+      maxLength: 10,
     );
   }
 

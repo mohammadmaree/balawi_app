@@ -219,7 +219,7 @@ class _WorkOrderDetailsPageState extends State<WorkOrderDetailsPage> {
   Widget _buildNameField() {
     return BuildDefaultFormField(
       controller: nameController,
-      huntText: LanguageKeys.fullName,
+      label: LanguageKeys.fullName,
       textInputType: TextInputType.name,
       textInputAction: TextInputAction.next,
     );
@@ -228,7 +228,9 @@ class _WorkOrderDetailsPageState extends State<WorkOrderDetailsPage> {
   Widget _buildPhoneField() {
     return BuildDefaultFormField(
       controller: phoneController,
-      huntText: LanguageKeys.phoneNumber,
+      maxLength: 10,
+      label: LanguageKeys.phoneNumber,
+      huntText: "07XXXXXXXX",
       textInputType: TextInputType.phone,
       textInputAction: TextInputAction.next,
     );
@@ -284,7 +286,7 @@ class _WorkOrderDetailsPageState extends State<WorkOrderDetailsPage> {
           width: UiResponsive.screenWidth! * 0.42,
           child: BuildDefaultFormField(
             controller: priceController,
-            huntText: LanguageKeys.price,
+            label: LanguageKeys.price,
             textInputType: TextInputType.number,
             textInputAction: TextInputAction.next,
           ),
@@ -293,7 +295,7 @@ class _WorkOrderDetailsPageState extends State<WorkOrderDetailsPage> {
           width: UiResponsive.screenWidth! * 0.42,
           child: BuildDefaultFormField(
             controller: paidAmountController,
-            huntText: LanguageKeys.paidAmount,
+            label: LanguageKeys.paidAmount,
             textInputType: TextInputType.number,
             textInputAction: TextInputAction.next,
           ),

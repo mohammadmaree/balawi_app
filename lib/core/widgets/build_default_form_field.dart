@@ -6,10 +6,10 @@ import 'package:flutter/services.dart';
 
 class BuildDefaultFormField extends StatelessWidget {
   final TextEditingController controller;
-  final String huntText;
+  final String label;
   final TextInputType textInputType;
   final TextInputAction textInputAction;
-  String? label;
+  String? huntText;
   bool? hidePassword;
   Widget? suffixIcon;
   VoidCallback? onChanged;
@@ -20,10 +20,10 @@ class BuildDefaultFormField extends StatelessWidget {
 
   BuildDefaultFormField({
     required this.controller,
-    required this.huntText,
+    required this.label,
     required this.textInputType,
     required this.textInputAction,
-    this.label,
+    this.huntText,
     this.hidePassword,
     this.suffixIcon,
     this.onChanged,
@@ -58,13 +58,13 @@ class BuildDefaultFormField extends StatelessWidget {
           fontWeight: FontWeight.w400,
         ),
         floatingLabelBehavior: FloatingLabelBehavior.always,
-        // hintText: huntText,
-        // hintStyle: TextStyle(
-        //   color: PrimaryColors.hint,
-        //   fontSize: UiResponsive.screenWidth! * 0.04,
-        //   fontWeight: FontWeight.w400,
-        //   fontFamily: AppConstants.TAJAWAL,
-        // ),
+        hintText: huntText,
+        hintStyle: TextStyle(
+          color: PrimaryColors.hint,
+          fontSize: UiResponsive.screenWidth! * 0.04,
+          fontWeight: FontWeight.w400,
+          fontFamily: AppConstants.TAJAWAL,
+        ),
         contentPadding: EdgeInsetsDirectional.only(
           start: UiResponsive.screenWidth! * 0.05,
           top: UiResponsive.screenHeight! * 0.027,
