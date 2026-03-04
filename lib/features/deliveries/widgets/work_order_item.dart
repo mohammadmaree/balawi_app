@@ -127,6 +127,26 @@ class WorkOrderItem extends StatelessWidget {
     return PrimaryColors.grey;
   }
 
+  String formatJOD(num price) {
+    if (price == 0.5) {
+      return "نص دينار";
+    }
+
+    if (price == 1) {
+      return "دينار";
+    }
+
+    if (price == 2) {
+      return "دينارين";
+    }
+
+    if (price > 2) {
+      return "${price.toStringAsFixed(price.truncateToDouble() == price ? 0 : 2)} دنانير";
+    }
+
+    return "$price دينار";
+  }
+
   @override
   Widget build(BuildContext context) {
     return Dismissible(
@@ -285,7 +305,7 @@ class WorkOrderItem extends StatelessWidget {
                           fontSize: UiResponsive.dimension_12,
                         ),
                         BuildDefaultText(
-                          text: '${workOrder.price ?? 0} دينار',
+                          text: formatJOD(workOrder.price ?? 0),
                           color: PrimaryColors.black,
                           fontSize: UiResponsive.dimension_15,
                           fontWeight: FontWeight.w600,
@@ -301,7 +321,7 @@ class WorkOrderItem extends StatelessWidget {
                           fontSize: UiResponsive.dimension_12,
                         ),
                         BuildDefaultText(
-                          text: '${workOrder.paidAmount ?? 0} دينار',
+                          text: formatJOD(workOrder.paidAmount ?? 0),
                           color: PrimaryColors.success,
                           fontSize: UiResponsive.dimension_15,
                           fontWeight: FontWeight.w600,
@@ -317,7 +337,7 @@ class WorkOrderItem extends StatelessWidget {
                           fontSize: UiResponsive.dimension_12,
                         ),
                         BuildDefaultText(
-                          text: '${workOrder.remainingAmount} دينار',
+                          text: formatJOD(workOrder.remainingAmount),
                           color: PrimaryColors.error,
                           fontSize: UiResponsive.dimension_15,
                           fontWeight: FontWeight.w600,
