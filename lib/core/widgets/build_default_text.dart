@@ -33,7 +33,7 @@ class BuildDefaultText extends StatelessWidget {
         fontSize: fontSize,
         color: color,
         fontWeight: fontWeight ?? FontWeight.w500,
-        fontFamily: AppConstants.TAJAWAL,
+        fontFamily: AppConstants.IBMPlexSansArabic,
         height: height ?? 1.8,
         decoration: textDecoration ?? TextDecoration.none,
         decorationColor: PrimaryColors.black.withValues(alpha: 0.4),

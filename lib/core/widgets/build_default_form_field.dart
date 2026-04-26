@@ -63,7 +63,7 @@ class BuildDefaultFormField extends StatelessWidget {
           color: PrimaryColors.hint,
           fontSize: UiResponsive.screenWidth! * 0.04,
           fontWeight: FontWeight.w400,
-          fontFamily: AppConstants.TAJAWAL,
+          fontFamily: AppConstants.IBMPlexSansArabic,
         ),
         contentPadding: EdgeInsetsDirectional.only(
           start: UiResponsive.screenWidth! * 0.05,

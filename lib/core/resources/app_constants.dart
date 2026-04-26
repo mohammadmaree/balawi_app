@@ -1,6 +1,6 @@
 class AppConstants {
   // General
-  static const String TAJAWAL = 'Tajawal';
+  static const String IBMPlexSansArabic = 'IBMPlexSansArabic';
 
   // Security
   static const String defaultPin = '0000';

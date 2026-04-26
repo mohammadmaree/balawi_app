@@ -10,9 +10,13 @@ class DioService {
   // For physical device, use your computer's local IP (e.g., 192.168.x.x)
   static String get baseUrl {
     if (Platform.isAndroid) {
-      return 'http://192.168.1.19:3000/api'; // Android emulator
+      return 'http://192.168.1.70:3000/api';
+      //return 'http://192.168.1.19:3000/api'; // Al Salhia
+      //return 'http://172.16.10.12:3000/api'; // work
     } else {
-      return 'http://192.168.1.19:3000/api'; // iOS simulator
+      return 'http://192.168.1.70:3000/api';
+      //return 'http://192.168.1.19:3000/api'; // Al Salhia
+      //return 'http://172.16.10.12:3000/api'; // work
     }
   }
 

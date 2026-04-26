@@ -35,6 +35,7 @@ class MyApp extends StatelessWidget {
       supportedLocales: context.supportedLocales,
       locale: context.locale,
       theme: ThemeData(
+        fontFamily: "IBMPlexSansArabic",
         colorScheme: ColorScheme.fromSeed(
           seedColor: PrimaryColors.white,
         ).copyWith(background: PrimaryColors.white),
