@@ -97,10 +97,12 @@ class SearchFilterButtonSheet extends StatelessWidget {
                 itemBuilder: (context, index) {
                   return LetterItem(
                     letter: customerController.getList()[index],
-                    function: () {
+                    function: () async {
                       customerController.selectLetters(
                         customerController.getList()[index].id ?? "",
                       );
+                      // Close the bottom sheet after selection
+                      Navigator.pop(context);
                     },
                   );
                 },
@@ -136,33 +138,6 @@ class SearchFilterButtonSheet extends StatelessWidget {
                 ],
               ),
               const SizedBox(height: 30.0),
-              // Apply button
-              Padding(
-                padding: EdgeInsets.symmetric(horizontal: 20.0),
-                child: GestureDetector(
-                  onTap: () async {
-                    await customerController.applyLetterFilter();
-                    Navigator.pop(context);
-                  },
-                  child: Container(
-                    width: double.infinity,
-                    padding: EdgeInsets.symmetric(vertical: 14.0),
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(13.0),
-                      color: PrimaryColors.blue,
-                    ),
-                    child: Center(
-                      child: BuildDefaultText(
-                        text: LanguageKeys.apply,
-                        color: PrimaryColors.white,
-                        fontSize: UiResponsive.dimension_16,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                  ),
-                ),
-              ),
-              const SizedBox(height: 20.0),
             ],
           ),
         );

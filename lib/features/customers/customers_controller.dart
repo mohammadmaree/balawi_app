@@ -247,8 +247,10 @@ class CustomerController extends GetxController {
     }
   }
 
-  selectLetters(String id) {
+  Future<void> selectLetters(String id) async {
     toggleLetterSelection(id);
+    // Immediately fetch customers with the selected letter filter
+    await fetchCustomers(refresh: true);
   }
 
   bool showAllReadingLevel = false;
