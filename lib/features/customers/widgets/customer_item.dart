@@ -1,5 +1,6 @@
 import 'package:balawi_app/core/resources/color.dart';
 import 'package:balawi_app/core/resources/language_keys.dart';
+import 'package:balawi_app/core/util/dialog_helper.dart';
 import 'package:balawi_app/core/util/ui_responsive.dart';
 import 'package:balawi_app/core/widgets/build_default_text.dart';
 import 'package:balawi_app/features/customers/data/models/customer_model.dart';
@@ -129,6 +130,14 @@ class CustomerItem extends StatelessWidget {
         ),
       ),
       confirmDismiss: (direction) async {
+        // Require PIN verification before showing delete confirmation
+        final bool verified = await DialogHelper.showPinVerification(
+          context,
+          message: 'أدخل الكود للسماح بحذف الزبون',
+        );
+        if (!verified) return false;
+
+        // Show delete confirmation dialog after PIN verification
         return await _showDeleteConfirmation(context);
       },
       onDismissed: (direction) {

@@ -103,7 +103,10 @@ class _CustomerDetailsPageState extends State<CustomerDetailsPage> {
 
     // Require PIN verification only when editing existing customer
     if (!isNewCustomer) {
-      final bool verified = await DialogHelper.showPinVerification(context);
+      final bool verified = await DialogHelper.showPinVerification(
+        context,
+        message: 'أدخل الكود للسماح بتعديل بيانات الزبون',
+      );
       if (!verified) return;
     }
 
