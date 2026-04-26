@@ -67,8 +67,9 @@ class SearchFilterButtonSheet extends StatelessWidget {
                       textAlign: TextAlign.center,
                     ),
                     GestureDetector(
-                      onTap: () {
-                        customerController.clearAllLetters();
+                      onTap: () async {
+                        await customerController.clearAllLetters();
+                        Navigator.pop(context);
                       },
                       child: BuildDefaultText(
                         text: LanguageKeys.deleteAll,

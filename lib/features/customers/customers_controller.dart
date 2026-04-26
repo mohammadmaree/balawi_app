@@ -114,12 +114,14 @@ class CustomerController extends GetxController {
   }
 
   /// Clear all selected letters
-  void clearAllLetters() {
+  Future<void> clearAllLetters() async {
     selectedLetter = null;
     for (var l in listOfLetters) {
       l.selected = false;
     }
     update();
+    // Fetch all customers without filter
+    await fetchCustomers(refresh: true);
   }
 
   /// Create a new customer
