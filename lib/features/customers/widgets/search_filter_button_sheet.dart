@@ -17,9 +17,9 @@ class SearchFilterButtonSheet extends StatelessWidget {
       builder: (_) {
         return Container(
           // height: UiResponsive.screenHeight!*0.88,
-          height: UiResponsive.screenHeight! * 0.85,
+          //height: UiResponsive.screenHeight! * 0.85,
           padding: const EdgeInsets.only(
-            top: 26.0,
+            top: 16.0,
             left: 10.0,
             right: 10.0,
             bottom: 15.0,
@@ -31,7 +31,8 @@ class SearchFilterButtonSheet extends StatelessWidget {
               topRight: Radius.circular(40),
             ),
           ),
-          child: ListView(
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
             //   crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               Padding(
@@ -85,9 +86,7 @@ class SearchFilterButtonSheet extends StatelessWidget {
                 shrinkWrap: true,
                 physics: BouncingScrollPhysics(),
                 gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: UiResponsive.isTablet()
-                      ? 5
-                      : 3, // Number of items per row
+                  crossAxisCount: 5, // عرض 6 أحرف في كل سطر
                   crossAxisSpacing: 10.0,
                   mainAxisSpacing: 10.0,
                   childAspectRatio:
@@ -108,36 +107,36 @@ class SearchFilterButtonSheet extends StatelessWidget {
                 },
               ),
               const SizedBox(height: 28.0),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  GestureDetector(
-                    onTap: () {
-                      customerController.changeShowAllReadingLevel();
-                    },
-                    child: Container(
-                      padding: EdgeInsets.symmetric(
-                        vertical: 12.0,
-                        horizontal: 20.0,
-                      ),
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(13.0),
-                        color: PrimaryColors.blue,
-                      ),
-                      child: BuildDefaultText(
-                        text: customerController.showAllReadingLevel
-                            ? LanguageKeys.showLess
-                            : LanguageKeys.showMore,
-                        color: PrimaryColors.white,
-                        fontSize: UiResponsive.dimension_14,
-                        fontWeight: FontWeight.bold,
-                        height: 1.5,
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-              const SizedBox(height: 30.0),
+              // Row(
+              //   mainAxisAlignment: MainAxisAlignment.center,
+              //   children: [
+              //     GestureDetector(
+              //       onTap: () {
+              //         customerController.changeShowAllReadingLevel();
+              //       },
+              //       child: Container(
+              //         padding: EdgeInsets.symmetric(
+              //           vertical: 12.0,
+              //           horizontal: 20.0,
+              //         ),
+              //         decoration: BoxDecoration(
+              //           borderRadius: BorderRadius.circular(13.0),
+              //           color: PrimaryColors.blue,
+              //         ),
+              //         child: BuildDefaultText(
+              //           text: customerController.showAllReadingLevel
+              //               ? LanguageKeys.showLess
+              //               : LanguageKeys.showMore,
+              //           color: PrimaryColors.white,
+              //           fontSize: UiResponsive.dimension_14,
+              //           fontWeight: FontWeight.bold,
+              //           height: 1.5,
+              //         ),
+              //       ),
+              //     ),
+              //   ],
+              // ),
+              // const SizedBox(height: 30.0),
             ],
           ),
         );
