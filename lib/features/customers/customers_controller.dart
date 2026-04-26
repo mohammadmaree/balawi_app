@@ -245,7 +245,7 @@ class CustomerController extends GetxController {
     if (showAllReadingLevel) {
       return listOfLetters;
     } else {
-      return listOfLetters.take(UiResponsive.isTablet() ? 10 : 6).toList();
+      return listOfLetters;
     }
   }
 
