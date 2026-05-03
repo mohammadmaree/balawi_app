@@ -320,6 +320,14 @@ class _WorkOrderDetailsPageState extends State<WorkOrderDetailsPage> {
             label: LanguageKeys.paidAmount,
             textInputType: TextInputType.number,
             textInputAction: TextInputAction.next,
+            onChanged: () {
+              if (!isPaid) return;
+              final price = num.tryParse(priceController.text.trim()) ?? 0;
+              final paid = num.tryParse(paidAmountController.text.trim()) ?? 0;
+              if (paid < price) {
+                setState(() => isPaid = false);
+              }
+            },
           ),
         ),
       ],
@@ -332,8 +340,16 @@ class _WorkOrderDetailsPageState extends State<WorkOrderDetailsPage> {
         Checkbox(
           value: isPaid,
           onChanged: (value) {
+            final checked = value ?? false;
             setState(() {
-              isPaid = value ?? false;
+              isPaid = checked;
+              if (checked) {
+                final price = num.tryParse(priceController.text.trim()) ?? 0;
+                final paid = num.tryParse(paidAmountController.text.trim()) ?? 0;
+                if (price > 0 && paid < price) {
+                  paidAmountController.text = price.toString();
+                }
+              }
             });
           },
           activeColor: PrimaryColors.blue,
