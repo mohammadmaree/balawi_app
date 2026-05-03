@@ -68,6 +68,7 @@ class LanguageKeys {
   static const String isPaid = 'مدفوع';
   static const String notPaid = 'غير مدفوع';
   static const String status = 'الحالة';
+  static const String notReady = 'غير جاهز';
   static const String ready = 'جاهز';
   static const String delivered = 'تم التسليم';
   static const String workDescription = 'وصف العمل';

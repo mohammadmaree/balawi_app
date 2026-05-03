@@ -14,7 +14,8 @@ class AppConstants {
   static const List<String> shelfNumbers = ['1', '2', '3', '4', 'ارض', 'طاولة'];
 
   // Work Order Status
+  static const String statusNotReady = 'غير جاهز';
   static const String statusReady = 'جاهز';
   static const String statusDelivered = 'تم التسليم';
-  static const List<String> workOrderStatuses = [statusReady, statusDelivered];
+  static const List<String> workOrderStatuses = [statusNotReady, statusReady, statusDelivered];
 }

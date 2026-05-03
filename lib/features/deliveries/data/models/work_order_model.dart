@@ -44,7 +44,7 @@ class WorkOrderModel {
           ? json['paidAmount']
           : (num.tryParse(json['paidAmount']?.toString() ?? '') ?? 0),
       isPaid: json['isPaid'] ?? false,
-      status: json['status']?.toString() ?? 'جاهز',
+      status: json['status']?.toString() ?? 'غير جاهز',
       workDescription: json['workDescription']?.toString() ?? '',
       notes: json['notes']?.toString() ?? '',
       deliveryDate: json['deliveryDate'] != null
@@ -68,7 +68,7 @@ class WorkOrderModel {
       'price': price ?? 0,
       'paidAmount': paidAmount ?? 0,
       'isPaid': isPaid ?? false,
-      'status': status ?? 'جاهز',
+      'status': status ?? 'غير جاهز',
       'workDescription': workDescription ?? '',
       'notes': notes ?? '',
     };

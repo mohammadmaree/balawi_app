@@ -61,7 +61,7 @@ class _WorkOrderDetailsPageState extends State<WorkOrderDetailsPage> {
       text: widget.workOrder?.notes ?? '',
     );
     shelfSelected = widget.workOrder?.shelfNumber;
-    statusSelected = widget.workOrder?.status ?? AppConstants.statusReady;
+    statusSelected = widget.workOrder?.status ?? AppConstants.statusNotReady;
     isPaid = widget.workOrder?.isPaid ?? false;
   }
 

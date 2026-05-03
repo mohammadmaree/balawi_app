@@ -104,6 +104,9 @@ class WorkOrderItem extends StatelessWidget {
     if (workOrder.status == 'تم التسليم') {
       return PrimaryColors.success;
     }
+    if (workOrder.status == 'غير جاهز') {
+      return PrimaryColors.error;
+    }
     return PrimaryColors.blue;
   }
 
