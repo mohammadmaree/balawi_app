@@ -1,5 +1,6 @@
 import 'package:balawi_app/core/resources/color.dart';
 import 'package:balawi_app/core/resources/language_keys.dart';
+import 'package:balawi_app/core/util/dialog_helper.dart';
 import 'package:balawi_app/core/util/ui_responsive.dart';
 import 'package:balawi_app/core/widgets/build_default_text.dart';
 import 'package:balawi_app/features/deliveries/data/models/work_order_model.dart';
@@ -187,6 +188,12 @@ class WorkOrderItem extends StatelessWidget {
         ),
       ),
       confirmDismiss: (direction) async {
+        final bool verified = await DialogHelper.showPinVerification(
+          context,
+          message: 'أدخل الكود للسماح بحذف الطلب',
+        );
+        if (!verified) return false;
+        if (!context.mounted) return false;
         return await _showDeleteConfirmation(context);
       },
       onDismissed: (direction) {
