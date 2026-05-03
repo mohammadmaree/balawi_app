@@ -110,6 +110,14 @@ class _WorkOrderDetailsPageState extends State<WorkOrderDetailsPage> {
       }
     }
 
+    final price = num.tryParse(priceController.text.trim()) ?? 0;
+    final paidAmount = num.tryParse(paidAmountController.text.trim()) ?? 0;
+
+    if (price > 0 && paidAmount > price) {
+      SnackbarHelper.showError('المبلغ المدفوع لا يمكن أن يكون أكبر من السعر');
+      return;
+    }
+
     // Require PIN verification only when editing
     if (!isNewOrder) {
       final bool verified = await DialogHelper.showPinVerification(context);
@@ -122,9 +130,6 @@ class _WorkOrderDetailsPageState extends State<WorkOrderDetailsPage> {
     });
 
     final DeliveriesController controller = Get.find<DeliveriesController>();
-
-    final price = num.tryParse(priceController.text.trim()) ?? 0;
-    final paidAmount = num.tryParse(paidAmountController.text.trim()) ?? 0;
 
     final workOrder = WorkOrderModel(
       customerName: nameController.text.trim(),
