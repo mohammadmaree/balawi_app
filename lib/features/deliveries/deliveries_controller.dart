@@ -66,8 +66,25 @@ class DeliveriesController extends GetxController {
       status: selectedStatus,
       shelfNumber: selectedShelf,
       isPaid: selectedPaymentStatus,
-      dateFrom: selectedDateFrom?.toIso8601String(),
-      dateTo: selectedDateTo?.toIso8601String(),
+      // Send full-day range in UTC so the last selected day is included
+      dateFrom: selectedDateFrom == null
+          ? null
+          : DateTime(
+              selectedDateFrom!.year,
+              selectedDateFrom!.month,
+              selectedDateFrom!.day,
+            ).toUtc().toIso8601String(),
+      dateTo: selectedDateTo == null
+          ? null
+          : DateTime(
+              selectedDateTo!.year,
+              selectedDateTo!.month,
+              selectedDateTo!.day,
+              23,
+              59,
+              59,
+              999,
+            ).toUtc().toIso8601String(),
       page: page,
       limit: 10,
     );
@@ -228,8 +245,9 @@ class DeliveriesController extends GetxController {
   }
 
   /// Mark as delivered
-  Future<bool> markAsDelivered(String id, {bool isPaid = false}) async {
-    final workOrder = WorkOrderModel(status: 'تم التسليم', isPaid: isPaid);
+  /// Payment is not touched: sending isPaid=false would reset paidAmount on the server.
+  Future<bool> markAsDelivered(String id) async {
+    final workOrder = WorkOrderModel(status: 'تم التسليم');
     return await updateWorkOrder(id, workOrder);
   }
 }

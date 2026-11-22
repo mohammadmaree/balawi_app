@@ -66,3 +66,6 @@ app.*.map.json
 
 # Web tooling
 web/wasm_debug/
+
+# Local secrets (API key)
+env.json

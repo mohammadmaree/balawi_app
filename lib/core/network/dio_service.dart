@@ -11,18 +11,28 @@ class DioService {
   static String get baseUrl {
     if (Platform.isAndroid) {
       //return 'http://192.168.1.70:3000/api'; //Abu Motuz
-      return 'https://mohammadmaree.com/api/'; // My home
-      //return 'http://172.16.10.12:3000/api';
+      //return 'https://mohammadmaree.com/api/'; // Server
+      return 'http://192.168.1.105:3000/api'; // My home
       //return 'http://172.16.10.123:3000/api'; // Sitech
     } else {
       //return 'http://192.168.1.70:3000/api'; //Abu Motuz
-      return 'https://mohammadmaree.com/api/'; // My home
-      //return 'http://172.16.10.12:3000/api';
+      //return 'https://mohammadmaree.com/api/'; // Server
+      return 'http://192.168.1.105:3000/api/'; // My home
       //return 'http://172.16.10.123:3000/api'; // Sitech
     }
   }
 
+  // API key sent in the "x-api-key" header.
+  // Provided at build time from env.json (not committed to git):
+  //   flutter run --dart-define-from-file=env.json
+  //   flutter build apk --dart-define-from-file=env.json
+  static const String _apiKey = String.fromEnvironment('API_KEY');
+
   DioService._() {
+    if (_apiKey.isEmpty) {
+      print('⚠️ API_KEY is missing. Run with --dart-define-from-file=env.json');
+    }
+
     _dio = Dio(
       BaseOptions(
         baseUrl: baseUrl,
@@ -32,6 +42,7 @@ class DioService {
         headers: {
           'Content-Type': 'application/json',
           'Accept': 'application/json',
+          'x-api-key': _apiKey,
         },
       ),
     );
