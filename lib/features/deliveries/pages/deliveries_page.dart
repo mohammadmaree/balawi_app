@@ -94,7 +94,8 @@ class _DeliveriesPageState extends State<DeliveriesPage> {
                             textAlign: TextAlign.center,
                           ),
                           //SizedBox(height: UiResponsive.calculateHeight(20.0)),
-                          _buildStatistics(),
+                          // Statistics temporarily hidden
+                          // _buildStatistics(),
                           SizedBox(height: UiResponsive.calculateHeight(20.0)),
                         ],
                       ),

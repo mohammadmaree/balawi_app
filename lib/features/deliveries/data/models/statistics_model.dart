@@ -1,8 +1,7 @@
-import 'package:balawi_app/features/deliveries/data/models/work_order_model.dart';
-
-/// Statistics Model
+/// Statistics Model (matches GET /api/work-orders/statistics)
 class StatisticsModel {
   final int total;
+  final int notReady;
   final int ready;
   final int delivered;
   final int unpaid;
@@ -10,11 +9,16 @@ class StatisticsModel {
   final num totalRevenue;
   final num totalPaidAmount;
   final num remainingAmount;
+
+  /// Shelf number -> orders count
   final Map<String, int> ordersByShelf;
-  final List<WorkOrderModel> recentOrders;
+
+  /// Number of orders created in the last 7 days
+  final int recentOrders;
 
   StatisticsModel({
     required this.total,
+    required this.notReady,
     required this.ready,
     required this.delivered,
     required this.unpaid,
@@ -27,33 +31,31 @@ class StatisticsModel {
   });
 
   factory StatisticsModel.fromJson(Map<String, dynamic> json) {
+    // Server sends: [{ "_id": "1", "count": 3 }, ...]
     final ordersByShelf = <String, int>{};
-    if (json['ordersByShelf'] != null) {
-      (json['ordersByShelf'] as Map<String, dynamic>).forEach((key, value) {
-        ordersByShelf[key] = value as int;
-      });
+    final shelves = json['ordersByShelf'];
+    if (shelves is List) {
+      for (final item in shelves) {
+        if (item is Map && item['_id'] != null) {
+          ordersByShelf[item['_id'].toString()] = (item['count'] as num?)?.toInt() ?? 0;
+        }
+      }
     }
 
-    final recentOrders = <WorkOrderModel>[];
-    if (json['recentOrders'] != null) {
-      recentOrders.addAll(
-        (json['recentOrders'] as List)
-            .map((e) => WorkOrderModel.fromJson(e as Map<String, dynamic>))
-            .toList(),
-      );
-    }
+    int toInt(dynamic value) => (value as num?)?.toInt() ?? 0;
 
     return StatisticsModel(
-      total: json['total'] ?? 0,
-      ready: json['ready'] ?? 0,
-      delivered: json['delivered'] ?? 0,
-      unpaid: json['unpaid'] ?? 0,
-      paid: json['paid'] ?? 0,
+      total: toInt(json['total']),
+      notReady: toInt(json['notReady']),
+      ready: toInt(json['ready']),
+      delivered: toInt(json['delivered']),
+      unpaid: toInt(json['unpaid']),
+      paid: toInt(json['paid']),
       totalRevenue: json['totalRevenue'] ?? 0,
       totalPaidAmount: json['totalPaidAmount'] ?? 0,
       remainingAmount: json['remainingAmount'] ?? 0,
       ordersByShelf: ordersByShelf,
-      recentOrders: recentOrders,
+      recentOrders: toInt(json['recentOrders']),
     );
   }
 }
