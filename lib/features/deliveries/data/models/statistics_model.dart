@@ -37,7 +37,8 @@ class StatisticsModel {
     if (shelves is List) {
       for (final item in shelves) {
         if (item is Map && item['_id'] != null) {
-          ordersByShelf[item['_id'].toString()] = (item['count'] as num?)?.toInt() ?? 0;
+          ordersByShelf[item['_id'].toString()] =
+              (item['count'] as num?)?.toInt() ?? 0;
         }
       }
     }

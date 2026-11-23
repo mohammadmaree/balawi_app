@@ -263,7 +263,7 @@ class _DeliveriesPageState extends State<DeliveriesPage> {
               decoration: InputDecoration(
                 filled: true,
                 fillColor: PrimaryColors.white,
-                hintText: 'ابحث عن اسم الزبون',
+                hintText: LanguageKeys.searchByNameOrNumber,
                 hintStyle: TextStyle(
                   fontSize: UiResponsive.dimension_14,
                   color: const Color(0xFF9A9DA3),

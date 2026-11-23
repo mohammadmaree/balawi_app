@@ -208,6 +208,70 @@ class WorkOrderService {
       );
     }
   }
+
+  /// Add a payment to a work order (returns the updated order)
+  Future<ApiResponse<WorkOrderModel>> addPayment(
+    String id, {
+    required num amount,
+    String note = '',
+  }) async {
+    try {
+      final response = await _dioService.post(
+        '$_workOrdersEndpoint/$id/payments',
+        data: {'amount': amount, 'note': note},
+      );
+
+      return ApiResponse.fromJson(
+        response.data,
+        (data) => WorkOrderModel.fromJson(data),
+      );
+    } on DioException catch (e) {
+      return ApiResponse<WorkOrderModel>(
+        success: false,
+        statusCode: e.response?.statusCode ?? 0,
+        message: DioService.handleError(e),
+        data: null,
+      );
+    } catch (e) {
+      return ApiResponse<WorkOrderModel>(
+        success: false,
+        statusCode: 0,
+        message: 'حدث خطأ غير متوقع: $e',
+        data: null,
+      );
+    }
+  }
+
+  /// Delete a payment from a work order (returns the updated order)
+  Future<ApiResponse<WorkOrderModel>> deletePayment(
+    String id,
+    String paymentId,
+  ) async {
+    try {
+      final response = await _dioService.delete(
+        '$_workOrdersEndpoint/$id/payments/$paymentId',
+      );
+
+      return ApiResponse.fromJson(
+        response.data,
+        (data) => WorkOrderModel.fromJson(data),
+      );
+    } on DioException catch (e) {
+      return ApiResponse<WorkOrderModel>(
+        success: false,
+        statusCode: e.response?.statusCode ?? 0,
+        message: DioService.handleError(e),
+        data: null,
+      );
+    } catch (e) {
+      return ApiResponse<WorkOrderModel>(
+        success: false,
+        statusCode: 0,
+        message: 'حدث خطأ غير متوقع: $e',
+        data: null,
+      );
+    }
+  }
 }
 
 /// Response data for work orders list

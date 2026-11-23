@@ -107,4 +107,18 @@ class LanguageKeys {
   static const String allStatuses = 'كل الحالات';
   static const String allShelves = 'كل الرفوف';
   static const String allPaymentStatuses = 'كل حالات الدفع';
+
+  // Payments & order number
+  static const String orderNumberPrefix = 'طلب #';
+  static const String payments = 'الدفعات';
+  static const String addPayment = 'إضافة دفعة';
+  static const String paymentAmount = 'مبلغ الدفعة';
+  static const String paymentNote = 'ملاحظة (اختياري)';
+  static const String noPayments = 'لا توجد دفعات';
+  static const String paymentAddedSuccessfully = 'تم إضافة الدفعة بنجاح';
+  static const String paymentDeletedSuccessfully = 'تم حذف الدفعة بنجاح';
+  static const String deletePaymentTitle = 'حذف الدفعة';
+  static const String invalidPaymentAmount = 'أدخل مبلغاً أكبر من صفر';
+  static const String fullyPaid = 'مدفوع بالكامل';
+  static const String searchByNameOrNumber = 'ابحث بالاسم أو رقم الطلب';
 }

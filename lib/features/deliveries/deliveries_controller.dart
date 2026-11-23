@@ -244,6 +244,51 @@ class DeliveriesController extends GetxController {
     }
   }
 
+  /// Replace an order in the list with its updated version
+  void _replaceInList(WorkOrderModel updated) {
+    final index = workOrders.indexWhere((w) => w.id == updated.id);
+    if (index != -1) workOrders[index] = updated;
+  }
+
+  /// Add a payment. Returns the updated order, or null on failure
+  /// (errorMessage is set).
+  Future<WorkOrderModel?> addPayment(
+    String id, {
+    required num amount,
+    String note = '',
+  }) async {
+    errorMessage = null;
+    final response = await _workOrderService.addPayment(
+      id,
+      amount: amount,
+      note: note,
+    );
+    if (response.success && response.data != null) {
+      _replaceInList(response.data!);
+      await fetchStatistics();
+      update();
+      return response.data;
+    }
+    errorMessage = response.message;
+    update();
+    return null;
+  }
+
+  /// Delete a payment. Returns the updated order, or null on failure.
+  Future<WorkOrderModel?> deletePayment(String id, String paymentId) async {
+    errorMessage = null;
+    final response = await _workOrderService.deletePayment(id, paymentId);
+    if (response.success && response.data != null) {
+      _replaceInList(response.data!);
+      await fetchStatistics();
+      update();
+      return response.data;
+    }
+    errorMessage = response.message;
+    update();
+    return null;
+  }
+
   /// Mark as delivered
   /// Payment is not touched: sending isPaid=false would reset paidAmount on the server.
   Future<bool> markAsDelivered(String id) async {

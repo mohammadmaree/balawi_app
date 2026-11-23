@@ -1,12 +1,20 @@
+import 'package:balawi_app/features/deliveries/data/models/payment_model.dart';
+
 /// Work Order Model
 class WorkOrderModel {
   String? id;
+
+  /// Short order number written on the item tag (e.g. 1023)
+  int? orderNumber;
   String? customerName;
   String? phoneNumber;
   String? shelfNumber;
   num? price;
   num? paidAmount;
   bool? isPaid;
+
+  /// All payments with dates (paidAmount is their sum, computed by the server)
+  List<PaymentModel> payments;
   String? status;
   String? workDescription;
   String? notes;
@@ -16,12 +24,14 @@ class WorkOrderModel {
 
   WorkOrderModel({
     this.id,
+    this.orderNumber,
     this.customerName,
     this.phoneNumber,
     this.shelfNumber,
     this.price,
     this.paidAmount,
     this.isPaid,
+    this.payments = const [],
     this.status,
     this.workDescription,
     this.notes,
@@ -34,6 +44,7 @@ class WorkOrderModel {
   factory WorkOrderModel.fromJson(Map<String, dynamic> json) {
     return WorkOrderModel(
       id: json['_id']?.toString(),
+      orderNumber: (json['orderNumber'] as num?)?.toInt(),
       customerName: json['customerName']?.toString(),
       phoneNumber: json['phoneNumber']?.toString(),
       shelfNumber: json['shelfNumber']?.toString(),
@@ -44,6 +55,11 @@ class WorkOrderModel {
           ? json['paidAmount']
           : (num.tryParse(json['paidAmount']?.toString() ?? '') ?? 0),
       isPaid: json['isPaid'] ?? false,
+      payments:
+          (json['payments'] as List<dynamic>?)
+              ?.map((e) => PaymentModel.fromJson(e as Map<String, dynamic>))
+              .toList() ??
+          [],
       status: json['status']?.toString() ?? 'غير جاهز',
       workDescription: json['workDescription']?.toString() ?? '',
       notes: json['notes']?.toString() ?? '',

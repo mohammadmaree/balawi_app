@@ -230,12 +230,25 @@ class WorkOrderItem extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Expanded(
-                    child: BuildDefaultText(
-                      text: workOrder.customerName ?? '',
-                      color: PrimaryColors.black,
-                      fontSize: UiResponsive.dimension_18,
-                      fontWeight: FontWeight.bold,
-                      maxLines: 1,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        if (workOrder.orderNumber != null)
+                          BuildDefaultText(
+                            text:
+                                '${LanguageKeys.orderNumberPrefix}${workOrder.orderNumber}',
+                            color: PrimaryColors.hint,
+                            fontSize: UiResponsive.dimension_13,
+                            fontWeight: FontWeight.w600,
+                          ),
+                        BuildDefaultText(
+                          text: workOrder.customerName ?? '',
+                          color: PrimaryColors.black,
+                          fontSize: UiResponsive.dimension_18,
+                          fontWeight: FontWeight.bold,
+                          maxLines: 1,
+                        ),
+                      ],
                     ),
                   ),
                   Container(
